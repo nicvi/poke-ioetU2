@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../services/pokemon.dart';
+import '../../models/pokemon.dart';
 import '../../services/pokemon_services.dart';
 import '../molecules/pokemonCard.dart';
 

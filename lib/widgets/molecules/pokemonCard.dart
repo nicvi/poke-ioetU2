@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../services/pokemon.dart';
+import '../../models/pokemon.dart';
 
 class PokemonCard extends StatefulWidget {
   final Pokemon pokemon;
