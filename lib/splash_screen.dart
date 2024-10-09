@@ -1,12 +1,12 @@
 import 'dart:async';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:poke_u2/widgets/pages/homePage.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 
-import 'main.dart';
 
 class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
@@ -24,13 +24,13 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   startTimer() async {
-    var duration = const Duration(seconds: 2);
+    var duration = const Duration(seconds: 0);
     return Timer(duration, route);
   }
 
   route() {
     Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => MyHomePage()));
+        context, MaterialPageRoute(builder: (context) => const MyHomePage()));
   }
 
     initScreen(BuildContext context) {
@@ -39,7 +39,8 @@ class _SplashScreenState extends State<SplashScreen> {
             constraints: const BoxConstraints.expand(),
             decoration: const BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage("assets/images/plain-white.png"), fit: BoxFit.cover),
+                  image: AssetImage("assets/images/plain-white.jpg"),
+                  fit: BoxFit.cover),
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,

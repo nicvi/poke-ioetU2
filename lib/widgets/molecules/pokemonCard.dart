@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../services/pokemon.dart';
+import '../../models/pokemon.dart';
 
 class PokemonCard extends StatefulWidget {
   final Pokemon pokemon;
@@ -22,7 +21,9 @@ class _PokemonCardState extends State<PokemonCard> {
       child: Row(
         children: <Widget>[
           Image.network(
-            widget.pokemon.pic ?? "https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg",
+            widget.pokemon.picUrl ??
+              "https://flutter.github.io/"
+              "assets-for-api-docs/assets/widgets/owl.jpg",
             width: 100,
             fit: BoxFit.cover,
           ),
@@ -38,7 +39,7 @@ class _PokemonCardState extends State<PokemonCard> {
                   ),
                 ),
                 Text(
-                  widget.pokemon.element?.join(" ") ?? "",
+                  widget.pokemon.element.join(" ") ,
                   style: const TextStyle(
                     fontSize: 15,
                   ),
