@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../models/pokemon.dart';
+import '../../models/stats.dart';
 import '../../services/pokemon_services.dart';
 import '../molecules/pokemonCard.dart';
 
@@ -17,7 +18,7 @@ class _PokemonListViewState extends State<PokemonListView> {
   String nextPokemonRequestUrl = "";
   Map<String, dynamic> displayedPokemon = {};
 
-    
+
   @override
   void initState() {
     super.initState();
@@ -28,7 +29,7 @@ class _PokemonListViewState extends State<PokemonListView> {
     List<dynamic> fetchedPokemonBunch =  await fetchPokemon("");
     setPokemonFiltered(fetchedPokemonBunch);
   }
-  
+
   Future<List<dynamic>> fetchPokemon(pokemonRequestUrl) async {
     var paginatedFetchedPokemon = await getPokemonPack(
         0,
@@ -42,10 +43,13 @@ class _PokemonListViewState extends State<PokemonListView> {
   }
 
   void setPokemonFiltered(List<dynamic> fetchedPokemonBunch) async {
-    List<Future<Pokemon>> fetchPokemon = fetchedPokemonBunch.map((basicPokemonData) async {
+    List<Future<Pokemon>> fetchPokemon =
+    fetchedPokemonBunch.map((basicPokemonData) async {
+      Map<String, dynamic> rawPokemonData =
+      await getSinglePokemon(basicPokemonData['url']!);
 
-      Map<String, dynamic> rawPokemonData = await getSinglePokemon(basicPokemonData['url']!);
-      Pokemon pokemon = createPokemon(rawPokemonData, basicPokemonData['url']!);
+      Pokemon pokemon =
+      createPokemon(rawPokemonData, basicPokemonData['url']!);
       return pokemon;
     }).toList();
 
@@ -60,17 +64,31 @@ class _PokemonListViewState extends State<PokemonListView> {
     List<String> elementTypes = pokemonRawData["types"]!.map((typeContainer) {
       return typeContainer["type"]!["name"]!;
     }).toList().cast<String>();
+    Map<String, int> completeStats = {};
+    for (var statAttributes in pokemonRawData["stats"]!) {
+      completeStats[
+      statAttributes["stat"]["name"]] = statAttributes["base_stat"];
+    }
+    Stats basicStats = Stats(
+        hp: completeStats["hp"]??1,
+        attack: completeStats["attack"]??1,
+        defense: completeStats["defense"]??1,
+        specialAttack: completeStats["special-attack"]??1,
+        specialDefense: completeStats["special-defense"]??1
+    );
     Pokemon pokemon = Pokemon(
       name: pokemonRawData['name']!,
       url: pokemonUrl,
       element: elementTypes,
-      pic: pokemonRawData['sprites']['front_default'],
+      picUrl: pokemonRawData['sprites']['front_default'],
+      stats: basicStats,
     );
     return pokemon;
   }
 
   Future<void> _addPokemon() async {
-    List<dynamic> newPokemonBunch =  await fetchPokemon(nextPokemonRequestUrl);
+    List<dynamic> newPokemonBunch =
+    await fetchPokemon(nextPokemonRequestUrl);
     setPokemonFiltered(newPokemonBunch);
   }
 
@@ -81,7 +99,16 @@ class _PokemonListViewState extends State<PokemonListView> {
       body: ListView.builder(
         itemCount: pokemonToDisplay.length,
         itemBuilder: (context, index) {
-          return PokemonCard(pokemon: pokemonToDisplay[index]);
+          return GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                '/poke-detail',
+                arguments: pokemonToDisplay[index],
+              );
+            },
+            child: PokemonCard(pokemon: pokemonToDisplay[index]),
+          );
         },
       ),
       floatingActionButton: FloatingActionButton(
