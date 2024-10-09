@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../models/stats.dart';
-import '../molecules/pokemonImageProfile.dart';
-import '../molecules/weightView.dart';
-import '../organisms/statListView.dart';
+import '../molecules/pokemon_image_profile.dart';
+import '../molecules/weight_view.dart';
+import '../organisms/stat_list_view.dart';
 
 class PokeDetails extends StatelessWidget {
   final String pokemonName;

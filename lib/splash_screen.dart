@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:poke_u2/widgets/pages/homePage.dart';
+import 'package:poke_u2/widgets/pages/home_page.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 
 

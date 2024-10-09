@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../models/pokemon.dart';
 import '../../models/stats.dart';
 import '../../services/pokemon_services.dart';
-import '../molecules/pokemonCard.dart';
+import '../molecules/pokemon_card.dart';
 
 
 class PokemonListView extends StatefulWidget {
@@ -18,7 +18,7 @@ class _PokemonListViewState extends State<PokemonListView> {
   String nextPokemonRequestUrl = "";
   Map<String, dynamic> displayedPokemon = {};
 
-    
+
   @override
   void initState() {
     super.initState();
@@ -29,7 +29,7 @@ class _PokemonListViewState extends State<PokemonListView> {
     List<dynamic> fetchedPokemonBunch =  await fetchPokemon("");
     setPokemonFiltered(fetchedPokemonBunch);
   }
-  
+
   Future<List<dynamic>> fetchPokemon(pokemonRequestUrl) async {
     var paginatedFetchedPokemon = await getPokemonPack(
         0,
@@ -44,13 +44,13 @@ class _PokemonListViewState extends State<PokemonListView> {
 
   void setPokemonFiltered(List<dynamic> fetchedPokemonBunch) async {
     List<Future<Pokemon>> fetchPokemon =
-      fetchedPokemonBunch.map((basicPokemonData) async {
-        Map<String, dynamic> rawPokemonData =
-          await getSinglePokemon(basicPokemonData['url']!);
+    fetchedPokemonBunch.map((basicPokemonData) async {
+      Map<String, dynamic> rawPokemonData =
+      await getSinglePokemon(basicPokemonData['url']!);
 
-        Pokemon pokemon =
-          createPokemon(rawPokemonData, basicPokemonData['url']!);
-        return pokemon;
+      Pokemon pokemon =
+      createPokemon(rawPokemonData, basicPokemonData['url']!);
+      return pokemon;
     }).toList();
 
     List<Pokemon> fetchedPokemon = await Future.wait(fetchPokemon);
@@ -67,7 +67,7 @@ class _PokemonListViewState extends State<PokemonListView> {
     Map<String, int> completeStats = {};
     for (var statAttributes in pokemonRawData["stats"]!) {
       completeStats[
-        statAttributes["stat"]["name"]] = statAttributes["base_stat"];
+      statAttributes["stat"]["name"]] = statAttributes["base_stat"];
     }
     Stats basicStats = Stats(
         hp: completeStats["hp"]??1,
@@ -88,7 +88,7 @@ class _PokemonListViewState extends State<PokemonListView> {
 
   Future<void> _addPokemon() async {
     List<dynamic> newPokemonBunch =
-      await fetchPokemon(nextPokemonRequestUrl);
+    await fetchPokemon(nextPokemonRequestUrl);
     setPokemonFiltered(newPokemonBunch);
   }
 

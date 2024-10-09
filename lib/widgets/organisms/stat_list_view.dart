@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:poke_u2/widgets/molecules/statCard.dart';
+import 'package:poke_u2/widgets/molecules/stat_card.dart';
 
 import '../../models/stats.dart';
 
