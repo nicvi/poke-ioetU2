@@ -22,8 +22,8 @@ class _PokemonCardState extends State<PokemonCard> {
         children: <Widget>[
           Image.network(
             widget.pokemon.picUrl ??
-              "https://flutter.github.io/"
-              "assets-for-api-docs/assets/widgets/owl.jpg",
+                "https://flutter.github.io/"
+                    "assets-for-api-docs/assets/widgets/owl.jpg",
             width: 100,
             fit: BoxFit.cover,
           ),
