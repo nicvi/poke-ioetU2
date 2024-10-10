@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:poke_u2/splash_screen.dart';
+import 'package:poke_u2/widgets/molecules/splash_screen.dart';
 import 'package:poke_u2/widgets/pages/pokemon_profile_view.dart';
 
 void main() {
