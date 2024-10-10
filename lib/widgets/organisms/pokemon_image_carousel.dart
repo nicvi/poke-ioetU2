@@ -59,26 +59,21 @@ class _PokemonImageCarouselState extends State<PokemonImageCarousel> {
       ),
       items: [
         PokemonImageProfile(
-          imageUrl: widget.pokemonPicUrl,
-          pokeName: widget.pokemonName
+          imageRoute: widget.pokemonPicUrl,
+          pokeName: widget.pokemonName,
         ),
 
-        ...pokemonPhotos.map((file) => _buildFileImage(file)),
+        ...pokemonPhotos.map(
+                (pokemonPhoto) => pokemonImageProfilesFromFile(pokemonPhoto)
+        ),
       ],
     );
   }
 
-  Widget _buildFileImage(File file) {
-    return Container(
-      width: double.infinity,
-      decoration: const BoxDecoration(
-        color: Colors.blue,
-      ),
-      child: Image.file(
-        file,
-        fit: BoxFit.cover,
-        height: 200,
-      ),
+  Widget pokemonImageProfilesFromFile(File pokemonPhotoDir) {
+    return PokemonImageProfile(
+        imageRoute: pokemonPhotoDir,
+        pokeName: widget.pokemonName,
     );
   }
 }

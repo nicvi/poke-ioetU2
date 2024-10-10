@@ -7,10 +7,10 @@ import 'package:path/path.dart' as path;
 
 class PokemonImageProfile extends StatefulWidget {
   final String pokeName;
-  final String imageUrl;
+  final Object imageRoute;
   const PokemonImageProfile({
     super.key,
-    required this.imageUrl,
+    required this.imageRoute,
     required this.pokeName
   });
 
@@ -45,13 +45,19 @@ class _PokemonImageProfileState extends State<PokemonImageProfile> {
       child: Stack(
         children: [
           Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(10.0),
             child: Center(
-              child: Image.network(
-                widget.imageUrl,
+              child: widget.imageRoute is String
+              ? Image.network(
+                widget.imageRoute as String,
                 fit: BoxFit.contain,
                 height: 200,
-              ),
+              )
+              : Image.file(
+                widget.imageRoute as File,
+                fit: BoxFit.cover,
+                height: 200,
+                ),
             ),
           ),
           Positioned(
