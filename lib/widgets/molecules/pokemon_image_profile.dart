@@ -20,7 +20,7 @@ class PokemonImageProfile extends StatefulWidget {
 
 class _PokemonImageProfileState extends State<PokemonImageProfile> {
 
-  Future<void> _takePhoto() async {
+  Future<void> takePokePhoto() async {
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: ImageSource.camera);
     if (pickedFile != null) {
@@ -61,7 +61,7 @@ class _PokemonImageProfileState extends State<PokemonImageProfile> {
               icon: const Icon(Icons.camera),
               iconSize: 40,
               onPressed: () async {
-                _takePhoto();
+                takePokePhoto();
               },
             ),
           ),

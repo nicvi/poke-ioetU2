@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../models/stats.dart';
-import '../molecules/pokemon_image_profile.dart';
 import '../molecules/weight_view.dart';
+import '../organisms/pokemon_image_carousel.dart';
 import '../organisms/stat_list_view.dart';
 
 class PokeDetails extends StatelessWidget {
@@ -31,9 +31,9 @@ class PokeDetails extends StatelessWidget {
       ),
       body: Column(
         children: [
-          PokemonImageProfile(
-              imageUrl: pokePicUrl,
-              pokeName: pokemonName
+          PokemonImageCarousel(
+              pokemonPicUrl: pokePicUrl,
+              pokemonName: pokemonName
           ),
           Padding(
             padding: const EdgeInsets.all(5.0),
