@@ -31,7 +31,10 @@ class PokeDetails extends StatelessWidget {
       ),
       body: Column(
         children: [
-          PokemonImageProfile(imageUrl: pokePicUrl,),
+          PokemonImageProfile(
+              imageUrl: pokePicUrl,
+              pokeName: pokemonName
+          ),
           Padding(
             padding: const EdgeInsets.all(5.0),
             child: Text(
