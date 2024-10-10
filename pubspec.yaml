@@ -1,6 +1,6 @@
 name: poke_u2
 description: "pokemon-project"
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: 'none'
 
 version: 1.0.0+1
 
@@ -11,7 +11,6 @@ dependencies:
   sleek_circular_slider: ^2.0.1
   http: ^1.2.2
   carousel_slider: ^5.0.0
-#  camera: ^0.11.0
   path_provider: ^2.0.10
   flutter:
     sdk: flutter
