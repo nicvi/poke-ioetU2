@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../models/pokemon.dart';
-import '../template/pokeDetails.dart';
+import '../template/poke_details.dart';
 
 class PokemonProfileView extends StatelessWidget {
   const PokemonProfileView({super.key});
