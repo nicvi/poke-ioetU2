@@ -1,11 +1,38 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:path/path.dart' as path;
 
-
-class PokemonImageProfile extends StatelessWidget {
+class PokemonImageProfile extends StatefulWidget {
+  final String pokeName;
   final String imageUrl;
+  const PokemonImageProfile({
+    super.key,
+    required this.imageUrl,
+    required this.pokeName
+  });
 
-  const PokemonImageProfile({super.key,required this.imageUrl});
+  @override
+  _PokemonImageProfileState createState() => _PokemonImageProfileState();
+}
 
+class _PokemonImageProfileState extends State<PokemonImageProfile> {
+
+  Future<void> _takePhoto() async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.camera);
+    if (pickedFile != null) {
+      final directory = await getApplicationDocumentsDirectory();
+      String picPartialName = path.basename(pickedFile.path).split('-')[0];
+      final imagePath = path.join(
+          directory.path,
+          "${widget.pokeName}-$picPartialName.jpg"
+      );
+      await File(pickedFile.path).copy(imagePath);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +48,7 @@ class PokemonImageProfile extends StatelessWidget {
             padding: const EdgeInsets.all(20.0),
             child: Center(
               child: Image.network(
-                imageUrl,
+                widget.imageUrl,
                 fit: BoxFit.contain,
                 height: 200,
               ),
@@ -33,8 +60,8 @@ class PokemonImageProfile extends StatelessWidget {
             child: IconButton(
               icon: const Icon(Icons.camera),
               iconSize: 40,
-              onPressed: () {
-                // Add your icon button functionality here
+              onPressed: () async {
+                _takePhoto();
               },
             ),
           ),
